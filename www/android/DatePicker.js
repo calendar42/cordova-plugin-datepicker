@@ -1,7 +1,13 @@
 /**
  * Phonegap DatePicker Plugin Copyright (c) Greg Allen 2011 MIT Licensed
  * Reused and ported to Android plugin by Daniel van 't Oever
+ *
+ * Updated by Freddy Snijder, Calendar42 Team
+ *
  */
+
+//Use custom logger if available
+//_log = window['_log'] || console;
 
 /**
  * Constructor
@@ -14,24 +20,21 @@ function DatePicker() {
  * show - true to show the ad, false to hide the ad
  */
 DatePicker.prototype.show = function(options, cb) {
-  
-	if (options.date) {
-		options.date = (options.date.getMonth() + 1) + "/" + 
-					   (options.date.getDate()) + "/" + 
-					   (options.date.getFullYear()) + "/" + 
-					   (options.date.getHours()) + "/" + 
-					   (options.date.getMinutes());
+	//var me = "DatePicker::show";
+
+	if (DatePicker.isDate(options.date)) {
+		options.date = options.date.getTime();
 	}
 
 	var defaults = {
-		mode : 'date',
-		date : '',
-		minDate: 0,
-		maxDate: 0,
-		doneButtonLabel: "Done",
-		cancelButtonLabel: "Cancel",
-		clearButtonLabel: "Clear",
-		clearButton: false
+		mode 				: 'date',
+		date 				: '',
+		minDate				: 0,
+		maxDate				: 0,
+		doneButtonLabel		: "Done",
+		cancelButtonLabel	: "Cancel",
+		clearButtonLabel	: "Clear",
+		clearButton			: false
 	};
 
 	for (var key in defaults) {
@@ -46,9 +49,9 @@ DatePicker.prototype.show = function(options, cb) {
 		if ( message == "clear" || message == "cancel" ) {
 			cb(message);
 		} else {
-			cb(new Date(message));
+			cb(new Date(parseInt(message, 10)));
 		}
-	}
+	};
   
 	cordova.exec(callback, 
 		null, 
@@ -56,6 +59,15 @@ DatePicker.prototype.show = function(options, cb) {
 		defaults.mode,
 		[defaults]
 	);
+};
+
+//Static
+DatePicker.isDate = function(d) {
+	if (!(d instanceof Date)) {
+		return false;
+	}
+
+	return !(isNaN(d.getTime()));
 };
 
 var datePicker = new DatePicker();

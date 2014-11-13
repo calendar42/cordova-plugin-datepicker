@@ -2,6 +2,9 @@
  * @author Bikas Vaibhav (http://bikasv.com) 2013
  * Rewrote the plug-in at https://github.com/phonegap/phonegap-plugins/tree/master/Android/DatePicker
  * It can now accept `min` and `max` dates for DatePicker.
+ *
+ * Adapted by Freddy Snijder, Calendar42 team, Nov. 2014.
+ *
  */
 
 package com.sharinglabs.cordova.plugin.datepicker;
@@ -41,7 +44,15 @@ public class DatePickerPlugin extends CordovaPlugin {
 
 	private static final String ACTION_DATE = "date";
 	private static final String ACTION_TIME = "time";
-	private final String pluginName = "DatePickerPlugin";
+	private final String pluginName         = "DatePickerPlugin";
+
+    //Initial picker date/time value
+    protected Calendar mCalendar;
+    protected int mYear;
+    protected int mMonth;
+    protected int mDay;
+    protected int mHour;
+    protected int mMinutes;
 
 	@Override
 	public boolean execute(final String action, final JSONArray data, final CallbackContext callbackContext) {
@@ -57,30 +68,24 @@ public class DatePickerPlugin extends CordovaPlugin {
 	public synchronized void show(final JSONArray data, final CallbackContext callbackContext) {
 		final DatePickerPlugin datePickerPlugin = this;
 		final Context currentCtx = cordova.getActivity();
-		final Calendar c = Calendar.getInstance();
 		final Runnable runnable;
 
-		String doneBLabel = "Done";
+		String doneBLabel   = "Done";
 		String cancelBLabel = "Cancel";
-		String clearBLabel = "Clear";
+		String clearBLabel  = "Clear";
 		Boolean clearButton = false;
 		
-		String action = "date";
-		long minDateLong = 0, maxDateLong = 0;
+		String action       = "date";
+		long minDateLong    = 0, maxDateLong = 0;
 
-		int month = -1, day = -1, year = -1, hour = -1, min = -1;
+        //By default initialize these date/time to 'now'
+        mCalendar           = Calendar.getInstance();
+
 		try {
 			JSONObject obj = data.getJSONObject(0);
 			action = obj.getString("mode");
 
-			String optionDate = obj.getString("date");
-
-			String[] datePart = optionDate.split("/");
-			month = Integer.parseInt(datePart[0]);
-			day = Integer.parseInt(datePart[1]);
-			year = Integer.parseInt(datePart[2]);
-			hour = Integer.parseInt(datePart[3]);
-			min = Integer.parseInt(datePart[4]);
+            mCalendar.setTimeInMillis(obj.getLong("date"));
 
 			minDateLong = obj.getLong("minDate");
 			maxDateLong = obj.getLong("maxDate");
@@ -94,12 +99,11 @@ public class DatePickerPlugin extends CordovaPlugin {
 			e.printStackTrace();
 		}
 
-		// By default initalize these fields to 'now'
-		final int mYear = year == -1 ? c.get(Calendar.YEAR) : year;
-		final int mMonth = month == -1 ? c.get(Calendar.MONTH) : month - 1;
-		final int mDay = day == -1 ? c.get(Calendar.DAY_OF_MONTH) : day;
-		final int mHour = hour == -1 ? c.get(Calendar.HOUR_OF_DAY) : hour;
-		final int mMinutes = min == -1 ? c.get(Calendar.MINUTE) : min;
+		mYear       = mCalendar.get(Calendar.YEAR);
+		mMonth      = mCalendar.get(Calendar.MONTH);
+		mDay        = mCalendar.get(Calendar.DAY_OF_MONTH);
+		mHour       = mCalendar.get(Calendar.HOUR_OF_DAY);
+		mMinutes    = mCalendar.get(Calendar.MINUTE);
 
 		final long minDate = minDateLong;
 		final long maxDate = maxDateLong;
@@ -263,7 +267,11 @@ public class DatePickerPlugin extends CordovaPlugin {
 		 */
 		@Override
 		public void onDateSet(final DatePicker view, final int year, final int monthOfYear, final int dayOfMonth) {
-			String returnDate = year + "/" + (monthOfYear + 1) + "/" + dayOfMonth;
+            mCalendar.set(Calendar.YEAR, year);
+            mCalendar.set(Calendar.MONTH, monthOfYear);
+            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+			String returnDate = String.valueOf(mCalendar.getTimeInMillis());
 			callbackContext.success(returnDate);
 		}
 	}
@@ -282,8 +290,14 @@ public class DatePickerPlugin extends CordovaPlugin {
 		 * time picker.
 		 */
 		@Override
-		public void onTimeSet(final TimePicker view, final int hourOfDay, final int minute) {			
-			Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+		public void onTimeSet(final TimePicker view, final int hourOfDay, final int minute) {
+            mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            mCalendar.set(Calendar.MINUTE, minute);
+
+            String returnDate = String.valueOf(mCalendar.getTimeInMillis());
+            callbackContext.success(returnDate);
+
+			/*Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 			calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
 			calendar.set(Calendar.MINUTE, minute);
 
@@ -291,7 +305,7 @@ public class DatePickerPlugin extends CordovaPlugin {
 			sdf.setTimeZone(TimeZone.getTimeZone("GMT"));  
 			String toReturn = sdf.format(calendar.getTime());
 
-			callbackContext.success(toReturn);
+			callbackContext.success(toReturn);*/
 		}
 	}
 

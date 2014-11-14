@@ -59,6 +59,8 @@
     //}
     if (isClearButton) {
         [self updateClearButton:options];
+    } else {
+        self.clearButton.hidden = YES;
     }
     
     [self updateDoneButton:options];

@@ -11,6 +11,10 @@
 */
 
 var exec = require('cordova/exec');
+
+//Use custom logger if available
+var _log = window['_log'] || console;
+
 /**
  * Constructor
  */
@@ -21,15 +25,26 @@ function DatePicker() {
 /**
  * show - true to show the ad, false to hide the ad
  */
-DatePicker.prototype.show = function(options, cb) {
+DatePicker.prototype.show = function(_options, cb) {
+    var me = "DatePicker::show";
+
+    _options = _options || {};
+
+    //clone (shallow copy) the options to not change the input _options hash object values
+    var options = {};
+    for (var prop in _options) {
+        options[prop] = _options[prop];
+    }
+
     var padDate = function(date) {
       if (date.length == 1) {
         return ("0" + date);
       }
+
       return date;
     };
 
-    var formatDate = function(date){
+    var formatDate = function(date) {
       date = date.getFullYear() 
             + "-" 
             + padDate(date.getMonth()+1) 
@@ -42,18 +57,24 @@ DatePicker.prototype.show = function(options, cb) {
             + ":00Z";
 
       return date
-    }
+    };
 
-    if (options.date) {
+    if (DatePicker.isDate(options.date)) {
         options.date = formatDate(options.date);
+    } else if (options.date) {
+        _log.warn(me + " : Given date is not a Date instance or an invalid date, using default instead ...");
     }
 
-    if (options.minDate) {
+    if (DatePicker.isDate(options.minDate)) {
         options.minDate = formatDate(options.minDate);
+    } else if (options.minDate) {
+        _log.warn(me + " : Given minDate is not a Date instance or an invalid date, using default instead ...");
     }
 
-    if (options.maxDate) {
+    if (DatePicker.isDate(options.maxDate)) {
         options.maxDate = formatDate(options.maxDate);
+    } else if (options.maxDate) {
+        _log.warn(me + " : Given maxDate is not a Date instance or an invalid date, using default instead ...");
     }
 
     var defaults = {
@@ -75,7 +96,7 @@ DatePicker.prototype.show = function(options, cb) {
     };
 
     for (var key in defaults) {
-        if (typeof options[key] !== "undefined")
+        if ((typeof options[key] !== "undefined") && (options[key] !== null))
             defaults[key] = options[key];
     }
     this._callback = cb;
@@ -97,7 +118,16 @@ DatePicker.prototype._dateSelected = function(date) {
     }
     if (this._callback)
         this._callback(d);
-}
+};
+
+//Static
+DatePicker.isDate = function(d) {
+    if (!(d instanceof Date)) {
+        return false;
+    }
+
+    return !(isNaN(d.getTime()));
+};
 
 var datePicker = new DatePicker();
 module.exports = datePicker;

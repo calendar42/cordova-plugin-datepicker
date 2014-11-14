@@ -7,7 +7,7 @@
  */
 
 //Use custom logger if available
-//_log = window['_log'] || console;
+var _log = window['_log'] || console;
 
 /**
  * Constructor
@@ -19,11 +19,21 @@ function DatePicker() {
 /**
  * show - true to show the ad, false to hide the ad
  */
-DatePicker.prototype.show = function(options, cb) {
-	//var me = "DatePicker::show";
+DatePicker.prototype.show = function(_options, cb) {
+	var me = "DatePicker::show";
+
+	_options = _options || {};
+
+	//clone (shallow copy) the options to not change the input _options hash object values
+	var options = {};
+	for (var prop in _options) {
+		options[prop] = _options[prop];
+	}
 
 	if (DatePicker.isDate(options.date)) {
 		options.date = options.date.getTime();
+	} else if (options.date) {
+		_log.warn(me + " : Given date is not a Date instance or an invalid date, using default instead ...");
 	}
 
 	var defaults = {
@@ -38,7 +48,7 @@ DatePicker.prototype.show = function(options, cb) {
 	};
 
 	for (var key in defaults) {
-		if (typeof options[key] !== "undefined") {
+		if ((typeof options[key] !== "undefined") && (options[key] !== null)) {
 			defaults[key] = options[key];
 		}
 	}

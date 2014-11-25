@@ -84,13 +84,15 @@ DatePicker.prototype.show = function(_options, cb) {
         allowFutureDates: true,
         minDate: '',
         maxDate: '',
+
         doneButtonLabel: 'Done',
-        doneButtonColor: '#0000FF',
+        doneButtonColor: '#428BCA',
         cancelButtonLabel: 'Cancel',
         cancelButtonColor: '#000000',
         clearButtonLabel: 'Clear',
-        clearButtonColor: '#FF0000',
+        clearButtonColor: '#B94A48',
         clearButton: false,
+
         x: '0',
         y: '0',
         minuteInterval : 5

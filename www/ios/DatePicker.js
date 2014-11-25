@@ -92,7 +92,8 @@ DatePicker.prototype.show = function(_options, cb) {
         clearButtonColor: '#FF0000',
         clearButton: false,
         x: '0',
-        y: '0'
+        y: '0',
+        minuteInterval : 5
     };
 
     for (var key in defaults) {

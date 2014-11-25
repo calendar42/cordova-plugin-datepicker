@@ -6,6 +6,8 @@
  
  Rewrite by Jens Krause (www.websector.de)
  
+ Further adapted by Freddy Snijder, Calendar42 team
+ 
  MIT Licensed
  */
 

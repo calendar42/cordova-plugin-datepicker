@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-           id="com.sharinglabs.cordova.plugin.datepicker"
-      version="1.1.2">
+           id="com.calendar42.marvin.datepicker"
+      version="1.2">
 
     <name>Datepicker</name>
-    <description>Cordova Datepicker Plugin for iOS and Android</description>
+    <description>Calendar42 Cordova Datepicker Plugin for iOS and Android</description>
     <license>MIT</license>
     <keywords>cordova,datepicker,ios,ios7,ios8,android</keywords>
 
@@ -13,7 +13,7 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="DatePickerPlugin">
-                <param name="android-package" value="com.sharinglabs.cordova.plugin.datepicker.DatePickerPlugin"/>
+                <param name="android-package" value="com.calendar42.marvin.services.ui.datepicker.DatePickerPlugin"/>
             </feature>
         </config-file>
         
@@ -21,7 +21,8 @@
             <clobbers target="datePicker" />
         </js-module>
 
-        <source-file src="src/android/DatePickerPlugin.java" target-dir="src/com/sharinglabs/cordova/plugin/datepicker" />
+        <source-file src="src/android/DatePickerPlugin.java" target-dir="src/com/calendar42/marvin/services/ui/datepicker" />
+        <source-file src="src/android/CustomTimePickerDialog.java" target-dir="src/com/calendar42/marvin/services/ui/datepicker" />
     </platform>
     
     <!-- ios -->

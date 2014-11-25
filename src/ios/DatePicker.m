@@ -7,6 +7,8 @@
  
  Rewrite by Jens Krause (www.websector.de)
  
+ Further adapted by Freddy Snijder, Calendar42 team
+ 
  MIT Licensed
  
  */
@@ -212,13 +214,14 @@
 #define DATETIME_FORMAT @"yyyy-MM-dd'T'HH:mm:ss'Z'"
 
 - (void)updateDatePicker:(NSMutableDictionary *)options {
-    NSDateFormatter *formatter = [self createISODateFormatter: DATETIME_FORMAT timezone:[NSTimeZone defaultTimeZone]];
-    NSString *mode = [options objectForKey:@"mode"];
-    NSString *dateString = [options objectForKey:@"date"];
-    BOOL allowOldDates = ([[options objectForKey:@"allowOldDates"] intValue] == 0) ? NO : YES;
-    BOOL allowFutureDates = ([[options objectForKey:@"allowFutureDates"] intValue] == 0) ? NO : YES;
-    NSString *minDateString = [options objectForKey:@"minDate"];
-    NSString *maxDateString = [options objectForKey:@"maxDate"];
+    NSDateFormatter *formatter  = [self createISODateFormatter: DATETIME_FORMAT timezone:[NSTimeZone defaultTimeZone]];
+    NSString *mode              = [options objectForKey:@"mode"];
+    NSString *dateString        = [options objectForKey:@"date"];
+    BOOL allowOldDates          = ([[options objectForKey:@"allowOldDates"] intValue] == 0) ? NO : YES;
+    BOOL allowFutureDates       = ([[options objectForKey:@"allowFutureDates"] intValue] == 0) ? NO : YES;
+    NSString *minDateString     = [options objectForKey:@"minDate"];
+    NSString *maxDateString     = [options objectForKey:@"maxDate"];
+    NSInteger minuteInterval    = [[options objectForKey:@"minuteInterval"] intValue];
     
     if (!allowOldDates) {
         self.datePicker.minimumDate = [NSDate date];
@@ -245,6 +248,10 @@
         self.datePicker.datePickerMode = UIDatePickerModeTime;
     } else {
         self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    }
+    
+    if (minuteInterval > 0) {
+        self.datePicker.minuteInterval = minuteInterval;
     }
 }
 

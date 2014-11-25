@@ -44,7 +44,8 @@ DatePicker.prototype.show = function(_options, cb) {
 		doneButtonLabel		: "Done",
 		cancelButtonLabel	: "Cancel",
 		clearButtonLabel	: "Clear",
-		clearButton			: false
+		clearButton			: false,
+		minuteInterval 		: 5
 	};
 
 	for (var key in defaults) {

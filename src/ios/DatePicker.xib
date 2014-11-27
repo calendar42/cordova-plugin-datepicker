@@ -3,8 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DatePicker">
@@ -46,7 +44,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="LoR-cB-dvN">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xq4-6B-F5W">
                                     <rect key="frame" x="0.0" y="12" width="90" height="20"/>
@@ -93,44 +91,32 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="tintColor" red="0.25882352941176473" green="0.54509803921568623" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="leading" secondItem="LoR-cB-dvN" secondAttribute="leading" constant="230" id="5Lv-k9-BnV"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="bottom" secondItem="cpP-9t-cvy" secondAttribute="bottom" id="5gW-7n-s0T"/>
+                                <constraint firstItem="xq4-6B-F5W" firstAttribute="leading" secondItem="LoR-cB-dvN" secondAttribute="leading" id="1pE-Vc-eyC"/>
+                                <constraint firstItem="xq4-6B-F5W" firstAttribute="centerY" secondItem="cpP-9t-cvy" secondAttribute="centerY" id="2r7-bL-3MB"/>
                                 <constraint firstItem="FEs-Wn-Ur2" firstAttribute="centerY" secondItem="cpP-9t-cvy" secondAttribute="centerY" id="689-mB-OLm"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="leading" secondItem="cpP-9t-cvy" secondAttribute="trailing" constant="25" id="Hc0-HH-URa"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="baseline" secondItem="cpP-9t-cvy" secondAttribute="baseline" id="LJh-bw-4zJ"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="top" secondItem="cpP-9t-cvy" secondAttribute="top" id="ML3-oG-lm7"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="baseline" secondItem="xq4-6B-F5W" secondAttribute="baseline" id="MSJ-XL-dwC"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="firstBaseline" secondItem="cpP-9t-cvy" secondAttribute="firstBaseline" id="N0n-Et-lVE"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="top" secondItem="xq4-6B-F5W" secondAttribute="top" id="R5T-SA-Boc"/>
-                                <constraint firstAttribute="trailing" secondItem="FEs-Wn-Ur2" secondAttribute="trailing" id="SE3-T8-kG8"/>
+                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="centerY" secondItem="xq4-6B-F5W" secondAttribute="centerY" id="JlN-sp-FhO"/>
+                                <constraint firstAttribute="height" constant="40" id="Qdg-jJ-Ygx"/>
                                 <constraint firstAttribute="trailing" secondItem="FEs-Wn-Ur2" secondAttribute="trailing" id="V0e-gu-xyo"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="baseline" secondItem="cpP-9t-cvy" secondAttribute="firstBaseline" id="YGa-wu-eLk"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="centerY" secondItem="xq4-6B-F5W" secondAttribute="centerY" id="YJ7-Pq-xvT"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="firstBaseline" secondItem="xq4-6B-F5W" secondAttribute="firstBaseline" id="YkD-3J-Zlu"/>
-                                <constraint firstAttribute="bottom" secondItem="cpP-9t-cvy" secondAttribute="bottom" id="d1V-hJ-11s"/>
                                 <constraint firstItem="xq4-6B-F5W" firstAttribute="top" secondItem="LoR-cB-dvN" secondAttribute="top" constant="12" id="f7Z-Tm-MDj"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="baseline" secondItem="xq4-6B-F5W" secondAttribute="firstBaseline" id="gAp-Sp-3md"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="bottom" secondItem="xq4-6B-F5W" secondAttribute="bottom" id="h6d-pt-5Bs"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="firstBaseline" secondItem="cpP-9t-cvy" secondAttribute="baseline" id="jjp-yn-38F"/>
-                                <constraint firstItem="FEs-Wn-Ur2" firstAttribute="firstBaseline" secondItem="xq4-6B-F5W" secondAttribute="baseline" id="kAV-jx-orJ"/>
-                                <constraint firstAttribute="trailing" secondItem="FEs-Wn-Ur2" secondAttribute="trailing" id="uC8-sc-OV1"/>
-                                <constraint firstItem="xq4-6B-F5W" firstAttribute="leading" secondItem="LoR-cB-dvN" secondAttribute="leading" id="wEk-0h-4vL"/>
+                                <constraint firstAttribute="centerX" secondItem="cpP-9t-cvy" secondAttribute="centerX" id="ydE-zW-6rP"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="height" constant="214" id="9uR-69-zFL"/>
-                        <constraint firstItem="LoR-cB-dvN" firstAttribute="leading" secondItem="CHZ-tf-She" secondAttribute="leading" id="DFd-qC-0a2"/>
+                        <constraint firstAttribute="trailing" secondItem="LoR-cB-dvN" secondAttribute="trailing" id="Jtw-rf-cGN"/>
                         <constraint firstItem="CHZ-tf-She" firstAttribute="leading" secondItem="b2J-jW-BgT" secondAttribute="leading" id="NUO-OT-Yul"/>
                         <constraint firstAttribute="trailing" secondItem="CHZ-tf-She" secondAttribute="trailing" id="Pds-Eg-BO8"/>
                         <constraint firstAttribute="bottom" secondItem="CHZ-tf-She" secondAttribute="bottom" id="Pz2-m8-ZCU"/>
                         <constraint firstItem="CHZ-tf-She" firstAttribute="top" secondItem="b2J-jW-BgT" secondAttribute="top" constant="30" id="QdG-3a-ddX"/>
+                        <constraint firstItem="LoR-cB-dvN" firstAttribute="leading" secondItem="b2J-jW-BgT" secondAttribute="leading" id="iDf-il-EwH"/>
                         <constraint firstItem="LoR-cB-dvN" firstAttribute="top" secondItem="b2J-jW-BgT" secondAttribute="top" id="x4p-wv-TJm"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
                 <constraint firstItem="b2J-jW-BgT" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="7Cn-9l-1Ra"/>
+                <constraint firstAttribute="centerX" secondItem="b2J-jW-BgT" secondAttribute="centerX" id="UPg-Wc-0YU"/>
                 <constraint firstAttribute="trailing" secondItem="b2J-jW-BgT" secondAttribute="trailing" id="ftU-Z8-LOZ"/>
                 <constraint firstAttribute="bottom" secondItem="b2J-jW-BgT" secondAttribute="bottom" id="v9p-KT-uOF"/>
             </constraints>
